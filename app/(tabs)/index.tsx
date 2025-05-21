@@ -1,55 +1,106 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function HomeScreen() {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+  
+  // Usar las nuevas imágenes
+  const smallLogoSource = require('@/assets/images/Logos-14.png');
+  const largeLogoSource = require('@/assets/images/Logos-15.png');
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerBackgroundColor={{ light: '#F2F2F2', dark: '#0A0A0A' }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={largeLogoSource}
+          style={styles.appLogo}
+          contentFit="contain"
+          cachePolicy="memory-disk"
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Welcome to O2 Fitness</ThemedText>
         <HelloWave />
       </ThemedView>
+      
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+        <ThemedView style={styles.logoRow}>
+          <Image 
+            source={smallLogoSource}
+            style={styles.smallLogo}
+            contentFit="contain"
+            cachePolicy="memory-disk"
+          />
+          <ThemedText type="subtitle">Today's Summary</ThemedText>
+        </ThemedView>
+        <ThemedView style={[styles.card, { 
+          borderColor: colors.cardBorder,
+          backgroundColor: colors.cardBackground 
+        }]}>
+          <ThemedText>You have no workouts scheduled for today.</ThemedText>
+          <Pressable style={styles.logoButton}>
+            <Image 
+              source={smallLogoSource}
+              style={styles.buttonLogo}
+              contentFit="contain"
+              cachePolicy="memory-disk"
+            />
+            <ThemedText type="defaultSemiBold" style={[styles.actionText, { color: colors.actionText }]}>
+              Tap to add a workout
+            </ThemedText>
+          </Pressable>
+        </ThemedView>
       </ThemedView>
+      
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
+        <ThemedView style={styles.logoRow}>
+          <Image 
+            source={smallLogoSource}
+            style={styles.smallLogo}
+            contentFit="contain"
+            cachePolicy="memory-disk"
+          />
+          <ThemedText type="subtitle">Recent Activity</ThemedText>
+        </ThemedView>
+        <ThemedView style={[styles.card, { 
+          borderColor: colors.cardBorder,
+          backgroundColor: colors.cardBackground 
+        }]}>
+          <ThemedText>No recent activities found.</ThemedText>
+          <ThemedText type="defaultSemiBold" style={[styles.actionText, { color: colors.actionText }]}>
+            Start tracking your workouts
+          </ThemedText>
+        </ThemedView>
       </ThemedView>
+      
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+        <ThemedView style={styles.logoRow}>
+          <Image 
+            source={smallLogoSource}
+            style={styles.smallLogo}
+            contentFit="contain"
+            cachePolicy="memory-disk"
+          />
+          <ThemedText type="subtitle">Weekly Progress</ThemedText>
+        </ThemedView>
+        <ThemedView style={[styles.card, { 
+          borderColor: colors.cardBorder,
+          backgroundColor: colors.cardBackground 
+        }]}>
+          <ThemedText>No workout data available yet.</ThemedText>
+          <ThemedText type="defaultSemiBold" style={[styles.actionText, { color: colors.actionText }]}>
+            Complete workouts to see your progress
+          </ThemedText>
+        </ThemedView>
       </ThemedView>
     </ParallaxScrollView>
   );
@@ -63,13 +114,47 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 16,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
+  appLogo: {
+    height: 240,
+    width: 370,
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  card: {
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    shadowColor: '#000000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  actionText: {
+    marginTop: 8,
+    fontWeight: '500',
+  },
+  smallLogo: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+  },
+  buttonLogo: {
+    width: 20,
+    height: 20,
+    marginRight: 8,
+  },
+  logoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  logoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
   },
 });
