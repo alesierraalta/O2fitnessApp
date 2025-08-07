@@ -1,5 +1,7 @@
 // Fallback for using MaterialIcons on Android and web.
 
+import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/useTheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { SymbolWeight } from 'expo-symbols';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
@@ -41,9 +43,14 @@ const MAPPING: Record<string, string> = {
   'plus': 'add',
   'gear': 'settings',
   'moon': 'nights-stay',
+  'sun.max': 'light-mode',
   'questionmark.circle': 'help-outline',
   'info.circle': 'info',
   'timer': 'timer',
+  'xmark.circle.fill': 'cancel',
+  'star': 'star',
+  'chart.bar': 'bar-chart',
+  'calendar': 'calendar-today',
 };
 
 /**
@@ -55,14 +62,25 @@ export function IconSymbol({
   size = 24,
   color,
   style,
+  themeAware = false,
 }: {
   name: string;
   size?: number;
   color: string | OpaqueColorValue;
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
+  themeAware?: boolean;
 }) {
+  const [theme] = useTheme();
+  let iconColor = color;
+  
+  // If themeAware is true, and no specific color is provided, use theme colors
+  if (themeAware && typeof color === 'undefined') {
+    const colors = Colors[theme ?? 'light'];
+    iconColor = colors.icon;
+  }
+  
   // Default to 'help-outline' if the icon is not mapped
   const materialIconName = MAPPING[name] || 'help-outline';
-  return <MaterialIcons color={color} size={size} name={materialIconName as any} style={style} />;
+  return <MaterialIcons color={iconColor} size={size} name={materialIconName as any} style={style} />;
 }
