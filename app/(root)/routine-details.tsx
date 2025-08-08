@@ -90,9 +90,9 @@ export default function RoutineDetailsScreen() {
                 color="#FFFFFF" 
               />
             </View>
-            <ThemedView style={styles.routineHeaderInfo}>
+            <ThemedView style={[styles.routineHeaderInfo, { backgroundColor: 'transparent' }]}>
               <ThemedText type="title" style={styles.routineTitle}>{routine.name}</ThemedText>
-              <ThemedView style={styles.authorRow}>
+              <ThemedView style={[styles.authorRow, { backgroundColor: 'transparent' }]}>
                 <Image 
                   source={require('@/assets/images/Logos-14.png')} 
                   style={styles.authorLogo}
@@ -107,17 +107,17 @@ export default function RoutineDetailsScreen() {
           </ThemedView>
           
           <ThemedView style={[styles.statsContainer, { backgroundColor: colors.tertiaryBackground }]}>
-            <ThemedView style={styles.statItem}>
+            <ThemedView style={[styles.statItem, { backgroundColor: 'transparent' }]}>
               <ThemedText type="defaultSemiBold" style={styles.statNumber}>{routine.exercises.length}</ThemedText>
               <ThemedText style={styles.statLabel}>Ejercicios</ThemedText>
             </ThemedView>
             <ThemedView style={[styles.statDivider, { backgroundColor: colorScheme === 'dark' ? '#444444' : '#E0E0E0' }]} />
-            <ThemedView style={styles.statItem}>
+            <ThemedView style={[styles.statItem, { backgroundColor: 'transparent' }]}>
               <ThemedText type="defaultSemiBold" style={styles.statNumber}>{routine.duration}</ThemedText>
               <ThemedText style={styles.statLabel}>Minutos</ThemedText>
             </ThemedView>
             <ThemedView style={[styles.statDivider, { backgroundColor: colorScheme === 'dark' ? '#444444' : '#E0E0E0' }]} />
-            <ThemedView style={styles.statItem}>
+            <ThemedView style={[styles.statItem, { backgroundColor: 'transparent' }]}>
               <ThemedView style={[styles.difficultyTag, {
                 backgroundColor: 
                   routine.difficulty === 'Principiante' ? '#4CAF50' :
@@ -132,16 +132,16 @@ export default function RoutineDetailsScreen() {
           <ThemedText style={styles.description}>{routine.description}</ThemedText>
           
           {/* Social stats - Instagram style */}
-          <ThemedView style={styles.socialStatsContainer}>
-            <ThemedView style={styles.socialStat}>
+          <ThemedView style={[styles.socialStatsContainer, { backgroundColor: 'transparent' }]}>
+            <ThemedView style={[styles.socialStat, { backgroundColor: 'transparent' }]}>
               <IconSymbol name="eye" size={14} color={colors.icon} />
               <ThemedText style={styles.socialStatText}>3.2k vistas</ThemedText>
             </ThemedView>
-            <ThemedView style={styles.socialStat}>
+            <ThemedView style={[styles.socialStat, { backgroundColor: 'transparent' }]}>
               <IconSymbol name="heart" size={14} color={colors.icon} />
               <ThemedText style={styles.socialStatText}>428 me gusta</ThemedText>
             </ThemedView>
-            <ThemedView style={styles.socialStat}>
+            <ThemedView style={[styles.socialStat, { backgroundColor: 'transparent' }]}>
               <IconSymbol name="message" size={14} color={colors.icon} />
               <ThemedText style={styles.socialStatText}>32 comentarios</ThemedText>
             </ThemedView>
@@ -155,9 +155,9 @@ export default function RoutineDetailsScreen() {
         
         {/* Exercise List */}
         <ThemedView style={styles.exercisesContainer}>
-          <ThemedView style={styles.sectionHeader}>
+          <ThemedView style={[styles.sectionHeader, { backgroundColor: 'transparent' }]}>
             <ThemedText type="subtitle" style={styles.sectionTitle}>Ejercicios ({routine.exercises.length})</ThemedText>
-            <ThemedView style={styles.exerciseFilters}>
+            <ThemedView style={[styles.exerciseFilters, { backgroundColor: 'transparent' }]}>
               <Pressable style={[styles.filterButton, { backgroundColor: colors.tint }]}>
                 <ThemedText style={styles.filterText}>Todos</ThemedText>
               </Pressable>
@@ -179,23 +179,23 @@ export default function RoutineDetailsScreen() {
                   borderColor: colors.cardBorder
                 }]}
               >
-                <ThemedView style={styles.exerciseHeader}>
-                  <ThemedView style={styles.exerciseHeaderLeft}>
+                <ThemedView style={[styles.exerciseHeader, { backgroundColor: 'transparent' }]}>
+                  <ThemedView style={[styles.exerciseHeaderLeft, { backgroundColor: 'transparent' }]}>
                     <ThemedView style={[styles.exerciseNumberContainer, { 
                       backgroundColor: colorScheme === 'dark' ? '#333333' : '#F2F2F7' 
                     }]}>
                       <ThemedText style={styles.exerciseNumber}>{index + 1}</ThemedText>
                     </ThemedView>
-                    <ThemedView>
+                    <ThemedView style={{ backgroundColor: 'transparent' }}>
                       <ThemedText type="defaultSemiBold" style={styles.exerciseName}>
                         {exercise.name}
                       </ThemedText>
-                      <ThemedView style={styles.muscleGroupContainer}>
+                      <ThemedView style={[styles.muscleGroupContainer, { backgroundColor: 'transparent' }]}>
                         <ThemedText style={styles.muscleGroup}>{exercise.muscleGroup}</ThemedText>
                       </ThemedView>
                     </ThemedView>
                   </ThemedView>
-                  <ThemedView style={styles.exerciseHeaderRight}>
+                  <ThemedView style={[styles.exerciseHeaderRight, { backgroundColor: 'transparent' }]}>
                     <Pressable style={styles.videoButton}>
                       <IconSymbol name="play.rectangle" size={20} color={colors.tint} />
                     </Pressable>
@@ -208,12 +208,12 @@ export default function RoutineDetailsScreen() {
                 </ThemedView>
                 
                 {expandedExercise === exercise.id && (
-                  <ThemedView style={styles.exerciseContent}>
+                  <ThemedView style={[styles.exerciseContent, { backgroundColor: 'transparent' }]}>
                     <ThemedText style={styles.exerciseDescription}>
                       {exercise.description}
                     </ThemedText>
                     
-                    <ThemedView style={styles.exerciseStats}>
+                    <ThemedView style={[styles.exerciseStats, { backgroundColor: 'transparent' }]}>
                       <ThemedView style={[styles.statBox, { backgroundColor: colors.tertiaryBackground }]}>
                         <ThemedText style={styles.statTitle}>Series</ThemedText>
                         <ThemedText type="defaultSemiBold" style={styles.statValue}>{exercise.sets}</ThemedText>
@@ -587,4 +587,4 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     textAlign: 'center',
   },
-}); 
+});
